@@ -1,6 +1,8 @@
 package tugasakhir;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -17,29 +19,34 @@ public class Main {
         // Menu utama
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Menu:");
-            System.out.println("1. Lihat Daftar Mobil");
-            System.out.println("2. Lihat Daftar Pelanggan");
-            System.out.println("3. Sewa Mobil");            //0 dan 1
-            System.out.println("4. Keluar");
-            System.out.print("Pilih menu: ");
-            int pilihan = scanner.nextInt();
+            try {
+                System.out.println("Menu:");
+                System.out.println("1. Lihat Daftar Mobil");
+                System.out.println("2. Lihat Daftar Pelanggan");
+                System.out.println("3. Sewa Mobil");
+                System.out.println("4. Keluar");
+                System.out.print("Pilih menu: ");
+                int pilihan = scanner.nextInt();
 
-            switch (pilihan) {
-                case 1:
-                    rental.printDaftarMobil();
-                    break;
-                case 2:
-                    rental.printDaftarPelanggan();
-                    break;
-                case 3:
-                    rental.sewaMobil();
-                    break;
-                case 4:
-                    System.out.println("Terima kasih telah menggunakan layanan kami.");
-                    return;
-                default:
-                    System.out.println("Pilihan tidak valid.");
+                switch (pilihan) {
+                    case 1:
+                        rental.printDaftarMobil();
+                        break;
+                    case 2:
+                        rental.printDaftarPelanggan();
+                        break;
+                    case 3:
+                        rental.sewaMobil();
+                        break;
+                    case 4:
+                        System.out.println("Terima kasih telah menggunakan layanan kami.");
+                        return;
+                    default:
+                        System.out.println("Pilihan tidak valid.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Input tidak valid. Silakan masukkan angka.");
+                scanner.nextLine(); // Menghapus input yang tidak valid
             }
         }
     }

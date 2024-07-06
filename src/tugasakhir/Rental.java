@@ -5,6 +5,7 @@
  */
 package tugasakhir;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Rental {
@@ -31,8 +32,9 @@ public class Rental {
     // Method untuk mencetak daftar mobil
     public void printDaftarMobil() {
         System.out.println("Daftar Mobil:");
-        for (Mobil mobil : daftarMobil) {
-            mobil.printInfo();
+        for (int i = 0; i < daftarMobil.size(); i++) {
+            System.out.println("Index: " + i);
+            daftarMobil.get(i).printInfo();
             System.out.println("----------------------");
         }
     }
@@ -40,8 +42,9 @@ public class Rental {
     // Method untuk mencetak daftar pelanggan
     public void printDaftarPelanggan() {
         System.out.println("Daftar Pelanggan:");
-        for (Pelanggan pelanggan : daftarPelanggan) {
-            pelanggan.printInfo();
+        for (int i = 0; i < daftarPelanggan.size(); i++) {
+            System.out.println("Index: " + i);
+            daftarPelanggan.get(i).printInfo();
             System.out.println("----------------------");
         }
     }
@@ -50,33 +53,41 @@ public class Rental {
     public void sewaMobil() {
         Scanner scanner = new Scanner(System.in);
 
-        // Tampilkan daftar mobil
-        printDaftarMobil();
+        try {
+            // Tampilkan daftar mobil
+            printDaftarMobil();
 
-        // Pilih mobil
-        System.out.print("Pilih mobil (index): ");
-        int indexMobil = scanner.nextInt();
-        Mobil mobil = daftarMobil.get(indexMobil);
+            // Pilih mobil
+            System.out.print("Pilih mobil (index): ");
+            int indexMobil = scanner.nextInt();
+            Mobil mobil = daftarMobil.get(indexMobil);
 
-        // Tampilkan daftar pelanggan
-        printDaftarPelanggan();
+            // Tampilkan daftar pelanggan
+            printDaftarPelanggan();
 
-        // Pilih pelanggan
-        System.out.print("Pilih pelanggan (index): ");
-        int indexPelanggan = scanner.nextInt();
-        Pelanggan pelanggan = daftarPelanggan.get(indexPelanggan);
+            // Pilih pelanggan
+            System.out.print("Pilih pelanggan (index): ");
+            int indexPelanggan = scanner.nextInt();
+            Pelanggan pelanggan = daftarPelanggan.get(indexPelanggan);
 
-        // Input jumlah hari sewa
-        System.out.print("Jumlah hari sewa: ");
-        int hari = scanner.nextInt();
+            // Input jumlah hari sewa
+            System.out.print("Jumlah hari sewa: ");
+            int hari = scanner.nextInt();
 
-        // Hitung total biaya
-        double totalBiaya = mobil.getHargaSewaPerHari() * hari;
+            // Hitung total biaya
+            double totalBiaya = mobil.getHargaSewaPerHari() * hari;
 
-        // Cetak informasi penyewaan
-        System.out.println("Pelanggan: " + pelanggan.getNama());
-        System.out.println("Mobil: " + mobil.getMerk() + " " + mobil.getModel());
-        System.out.println("Jumlah hari sewa: " + hari);
-        System.out.println("Total biaya: " + totalBiaya);
+            // Cetak informasi penyewaan
+            System.out.println("Pelanggan: " + pelanggan.getNama());
+            System.out.println("Mobil: " + mobil.getMerk() + " " + mobil.getModel());
+            System.out.println("Jumlah hari sewa: " + hari);
+            System.out.println("Total biaya: " + totalBiaya);
+        } catch (InputMismatchException e) {
+            System.out.println("Input tidak valid. Silakan coba lagi.");
+            scanner.nextLine(); // Menghapus input yang tidak valid
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Index tidak valid. Silakan coba lagi.");
+        }
     }
 }
+
